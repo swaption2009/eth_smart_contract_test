@@ -8,4 +8,20 @@ web3.setProvider(
   new Web3.providers.HttpProvider('http://localhost:8545')
   );
 
-app.innerHTML = '<h2>Welcome to hello-counter</h2>'
+window.checkBalance = function() {
+  web3.eth.personal.getAccounts().then(accounts => {
+    console.log('accounts', accounts);
+
+    web3.eth.getBalance(accounts[0]).then(balance => {
+      console.log('balance[0]', balance);
+    });
+  });
+};
+
+app.innerHTML = `
+  <h2>Welcome to hello-counter</h2>
+  <button
+    type="button" onClick="checkBalance();">
+    check balance
+  </button>
+`;
